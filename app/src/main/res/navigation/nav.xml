@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:label="MainActivity"
+    app:startDestination="@id/first_Fragment">
+    <fragment
+        android:id="@+id/first_Fragment"
+        android:name="com.EasySoundController.First_Fragment"
+        android:label="Easy Sound Controller"
+        tools:layout="@layout/first_fragment">
+        <action
+            android:id="@+id/action_first_Fragment_to_second_fragment"
+            app:destination="@id/second_fragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_first_Fragment_to_about_menu"
+            app:destination="@id/about_menu"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/second_fragment"
+        android:name="com.EasySoundController.Second_Fragment"
+        android:label="Settings"
+        tools:layout="@layout/second_fragment">
+        <action
+            android:id="@+id/action_second_fragment_to_first_Fragment"
+            app:destination="@id/first_Fragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/about_menu"
+        android:name="com.EasySoundController.About"
+        android:label="About"
+        tools:layout="@layout/about">
+        <action
+            android:id="@+id/action_about_menu_to_first_Fragment"
+            app:destination="@id/first_Fragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+</navigation>

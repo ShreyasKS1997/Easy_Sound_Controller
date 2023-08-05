@@ -1,0 +1,63 @@
+<resources>
+    <string name="go_to_easy_sound_controller_home_screen">Go to Easy Sound Controller Home Screen</string>
+    <string name="put_the_phone_to_silent_mode">Put the phone to Silent Mode</string>
+    <string name="put_the_phone_to_vibration_mode">Put the Phone to Vibration Mode</string>
+    <string name="put_the_phone_to_normal_mode">Put the Phone to Normal Mode</string>
+    <string name="adjust_media_volume">Adjust Media Volume</string>
+    <string name="close_this_notification_volume_control_service">Close this Notification Volume Control Service</string>
+    <string name="version">Version</string>
+    <string name="v1_0_0">v1.0.1</string>
+    <string name="rate_us">Rate us</string>
+    <string name="please_rate_us">Please rate us</string>
+    <string name="for_feedback_help_suggestions_reporting_bug_or_any_other_support_please_drop_a_mail_to_the_below_given_email">For Feedback, Help, Suggestions, Reporting Bug or any other Support, Please drop a mail to the below given email.</string>
+    <string name="we_will_respond_to_your_mail_as_soon_as_possible">We will respond to your mail as soon as possible</string>
+    <string name="easyappsconnect_gmail_com">easyappsconnect@gmail.com</string>
+    <string name="all_the_icons_in_this_app_are_used_from_google_s_material_icons">All the icons in this app are used from Google\'s Material Icons</string>
+
+    <string name="media_volume_seekbar_home_screen">Adjust Media Volume</string>
+    <string name="call_volume_seekbar_home_screen">Adjust call Volume</string>
+    <string name="ring_volume_seekbar_home_screen">Adjust Ring Volume</string>
+    <string name="alarm_volume_seekbar_home_screen">Adjust Alarm Volume</string>
+    <string name="notification_volume_seekbar_home_screen">Adjust Notification Volume</string>
+    <string name="system_volume_seekbar_home_screen">Adjust System Volume</string>
+    <string name="dtmf_volume_seekbar_home_screen">Adjust Dial Tone Volume</string>
+
+    <string name="media_volume_home_screen">Media Volume :</string>
+    <string name="call_volume_home_screen">Call Volume :</string>
+    <string name="ring_volume_home_screen">Ring Volume :</string>
+    <string name="alarm_volume_home_screen">Alarm Volume :</string>
+    <string name="notification_volume_home_screen">Notification Volume :</string>
+    <string name="system_volume_home_screen">System Volume :</string>
+    <string name="dtmf_volume_home_screen">Dial Tone Volume :</string>
+    <string name="create_the_above_volume_preset">Create Volume Profile</string>
+    <string name="toggle_do_not_disturb_mode">Toggle Do Not Disturb Mode</string>
+    <string name="silent_mode">Silent Mode</string>
+    <string name="vibration_mode">Vibration Mode</string>
+    <string name="ring_tone_normal_mode">ring tone normal mode</string>
+    <string name="mute_music_volume">mute music volume</string>
+    <string name="choose_your_presets">Choose your Profile:</string>
+    <string name="choose">Choose</string>
+    <string name="easy_sound_controller_has_started_a_foreground_service">Easy Sound Controller has started a Foreground Service</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="turn_off_this_notification">Turn off this Notification</string>
+    <string name="manage_permissions">Manage Permissions</string>
+    <string name="manage_necessary_permissions_for_this_app">Manage necessary Permissions for this App</string>
+    <string name="select_volumes_to_display_on_main_screen">Select Volumes to display on Main Screen</string>
+    <string name="select_list_of_volumes_to_show_on_the_main_screen">select list of volumes to show on the main screen</string>
+    <string name="choose_dark_light_or_system_default_mode">Choose Dark, Light or System Default Mode</string>
+    <string name="app_theme">App theme</string>
+    <string name="choose_the_quick_shortcut_floating_button_action">Choose the Quick Shortcut Floating Button Action</string>
+    <string name="quick_shortcut_floating_button_action">Quick Shortcut Floating Button Action</string>
+    <string name="enable_quick_shortcut_floating_button">Enable Quick Shortcut Floating Button</string>
+    <string name="set_quick_shortcut_floating_button_size">Set Quick Shortcut Floating Button size:</string>
+    <string name="stick_quick_shortcut_floating_button_to_the_sides_of_the_screen">Stick Quick Shortcut Floating Button to the sides of the Screen</string>
+    <string name="enable_some_quick_volume_controls_in_notification">Enable Volume Controls in Notification</string>
+    <string name="enable_icon_notification_when_ring_mode_changes">Enable Icon Notification when Ring Mode changes</string>
+    <string name="settingsMenuItem">Settings</string>
+    <string name="aboutMenuItem">About</string>
+
+    <string name="textViewPercent">%1$d%%</string>
+    <string name="terms_of_use">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+</resources>
