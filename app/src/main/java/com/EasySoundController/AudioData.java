@@ -265,24 +265,26 @@ public class AudioData {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-                    if (audioManager.getRingerMode() != 1 && audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-                        if (notificationManager.isNotificationPolicyAccessGranted()) {
-                            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, progress, 0);
+                        if (audioManager.getRingerMode() != 1 && audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+                            if (notificationManager.isNotificationPolicyAccessGranted()) {
+                                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, progress, 0);
+
+                                if (audioManager.getRingerMode() == 1 | (audioManager.getRingerMode() != 1 &&
+                                        audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) | audioManager.getRingerMode() == 0) {
+                                    if (progress > 0) {
+                                        audioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_SHOW_UI);
+                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                    }
+                                }
+
+                            } else {
+                                seekBar.setEnabled(false);
+                                dialogs.needsDnDPermissionDialog(context, seekBar5, false);
+                                seekBar5.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                            }
                         } else {
-                            seekBar.setEnabled(false);
-                            dialogs.needsDnDPermissionDialog(context, seekBar5, false);
-                            seekBar5.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, progress, 0);
                         }
-                    } else {
-                        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, progress, 0);
-                    }
-                    if (audioManager.getRingerMode() == 1 | (audioManager.getRingerMode() != 1 &&
-                            audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) | audioManager.getRingerMode() == 0) {
-                        if (progress > 0) {
-                            audioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_SHOW_UI);
-                            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                        }
-                    }
                 }
                 textViewPercent5.setText(context.getString(R.string.textViewPercent, ((100 * audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION)) / maxMusicVolume)));
             }
@@ -317,24 +319,26 @@ public class AudioData {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-                    if (audioManager.getRingerMode() != 1 && audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-                        if (notificationManager.isNotificationPolicyAccessGranted()) {
-                            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, progress, 0);
+                        if (audioManager.getRingerMode() != 1 && audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+                            if (notificationManager.isNotificationPolicyAccessGranted()) {
+                                audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, progress, 0);
+
+                                if (audioManager.getRingerMode() == 1 | (audioManager.getRingerMode() == 2 &&
+                                        audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) | audioManager.getRingerMode() == 0) {
+                                    if (progress > 0) {
+                                        audioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_SHOW_UI);
+                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                    }
+                                }
+
+                            } else {
+                                seekBar.setEnabled(false);
+                                dialogs.needsDnDPermissionDialog(context, seekBar6, false);
+                                seekBar6.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+                            }
                         } else {
-                            seekBar.setEnabled(false);
-                            dialogs.needsDnDPermissionDialog(context, seekBar6, false);
-                            seekBar6.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+                            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, progress, 0);
                         }
-                    } else {
-                        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, progress, 0);
-                    }
-                    if (audioManager.getRingerMode() == 1 | (audioManager.getRingerMode() == 2 &&
-                            audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) | audioManager.getRingerMode() == 0) {
-                        if (progress > 0) {
-                            audioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_SHOW_UI);
-                            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                        }
-                    }
                 }
                 textViewPercent6.setText(context.getString(R.string.textViewPercent, ((100 * audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM)) / maxMusicVolume)));
             }

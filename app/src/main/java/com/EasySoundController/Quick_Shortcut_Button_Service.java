@@ -245,7 +245,20 @@ public class Quick_Shortcut_Button_Service extends Service {
                 if (musicVolume == 0) {
                     musicButton.setImageResource(R.drawable.music_off_35);
                 } else if (lastvolume == 0 && musicVolume >= 1) {
-                    musicButton.setImageResource(R.drawable.music_on_35);
+                    switch (MainActivity.audioOutputType) {
+                        case "headphone":
+                            musicButton.setImageResource(R.drawable.headphones_35);
+                            break;
+                        case "headset":
+                            musicButton.setImageResource(R.drawable.headset_mic_35);
+                            break;
+                        case "bluetoothHeadset":
+                            musicButton.setImageResource(R.drawable.bluetooth_audio_35);
+                            break;
+                        default:
+                            musicButton.setImageResource(R.drawable.music_on_35);
+                            break;
+                    }
                 }
                 lastvolume = musicVolume;
             }
