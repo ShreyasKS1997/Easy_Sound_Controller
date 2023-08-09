@@ -49,29 +49,65 @@ public class broadcastAndOtherCommonMethods {
         }
     }
 
-    static void setMusicIcon(AudioManager audioManager, ImageView imageView) {
+    static void setMusicIcon(AudioManager audioManager) {
         String headSetHeadphoneOrNone = headsetPluggedBroadcast(audioManager);
-        if (imageView != null) {
             switch (headSetHeadphoneOrNone) {
                 case "headphone":
-                    imageView.setImageResource(R.drawable.headphones_35);
                     MainActivity.audioOutputType = "headphone";
                     break;
                 case "headset":
-                    imageView.setImageResource(R.drawable.headset_mic_35);
                     MainActivity.audioOutputType = "headset";
                     break;
                 case "bluetoothHeadset":
-                    imageView.setImageResource(R.drawable.bluetooth_audio_35);
                     MainActivity.audioOutputType = "bluetoothHeadset";
                     break;
                 default:
-                    if (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) >= 1) {
-                        imageView.setImageResource(R.drawable.music_on_35);
-                    } else {
-                        imageView.setImageResource(R.drawable.music_off_35);
-                    }
                     MainActivity.audioOutputType = "musicIcon";
+                    break;
+            }
+    }
+
+    static void setMusicIconWhenVolumeChanged(int lastVolume, int musicVolume, ImageView musicIconImageView) {
+        if (musicVolume == 0) {
+            musicIconImageView.setImageResource(R.drawable.music_off_35);
+        } else if (lastVolume == 0 && musicVolume >= 1) {
+            switch (MainActivity.audioOutputType) {
+                case "headphone":
+                    musicIconImageView.setImageResource(R.drawable.headphones_35);
+                    break;
+                case "headset":
+                    musicIconImageView.setImageResource(R.drawable.headset_mic_35);
+                    break;
+                case "bluetoothHeadset":
+                    musicIconImageView.setImageResource(R.drawable.bluetooth_audio_35);
+                    break;
+                default:
+                    musicIconImageView.setImageResource(R.drawable.music_on_35);
+                    break;
+            }
+        }
+    }
+
+    static void setMusicIconWhenLayoutRefreshed(int currentVolume, ImageView musicImageView) {
+        if (currentVolume == 0) {
+            musicImageView.setImageResource(R.drawable.music_off_35);
+        } else {
+            switch (MainActivity.audioOutputType) {
+                case "headphone":
+                    musicImageView.setImageResource(R.drawable.headphones_35);
+                    break;
+                case "headset":
+                    musicImageView.setImageResource(R.drawable.headset_mic_35);
+                    break;
+                case "bluetoothHeadset":
+                    musicImageView.setImageResource(R.drawable.bluetooth_audio_35);
+                    break;
+                default:
+                    if (currentVolume >= 1) {
+                        musicImageView.setImageResource(R.drawable.music_on_35);
+                    } else {
+                        musicImageView.setImageResource(R.drawable.music_off_35);
+                    }
                     break;
             }
         }

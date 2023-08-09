@@ -74,10 +74,14 @@ public class First_Fragment extends Fragment {
                 if (isInitialStickyBroadcast()) {
 
                 } else {
-                    if (binding.seekBar.isShown()) {
-                        binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-                        broadcastAndOtherCommonMethods.setMusicIcon(audioManager, binding.imageView);
+                    broadcastAndOtherCommonMethods.setMusicIcon(audioManager);
+                    if (binding.imageView != null) {
+                        broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), binding.imageView);
                     }
+                    if (binding.seekBar != null) {
+                        binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+                    }
+                    MainActivity.lastVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                 }
             }
         };
@@ -353,7 +357,7 @@ public class First_Fragment extends Fragment {
             binding.adFrameLayout.addView(MainActivity.adView);
         }
 
-        broadcastAndOtherCommonMethods.setMusicIcon(audioManager, binding.imageView);
+        broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), binding.imageView);
 
     }
 

@@ -87,7 +87,6 @@ public class Quick_Shortcut_Button_Service extends Service {
     ViewTreeObserver.OnGlobalLayoutListener screenLayoutOrietationChangeListener;
     MediaRouter mediaRouter;
     MediaRouter.Callback callback;
-    int lastvolume = 0;
 
 
 
@@ -123,11 +122,7 @@ public class Quick_Shortcut_Button_Service extends Service {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
         orientationChanged = true;
-
-        broadcastAndOtherCommonMethods.setMusicIcon(audioManager, musicButton);
-
     }
 
     @Nullable
@@ -199,7 +194,7 @@ public class Quick_Shortcut_Button_Service extends Service {
 
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
 
-        lastvolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        MainActivity.lastVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -242,25 +237,8 @@ public class Quick_Shortcut_Button_Service extends Service {
             @Override
             public void onRouteVolumeChanged(MediaRouter router, MediaRouter.RouteInfo info) {
                 int musicVolume = info.getVolume();
-                if (musicVolume == 0) {
-                    musicButton.setImageResource(R.drawable.music_off_35);
-                } else if (lastvolume == 0 && musicVolume >= 1) {
-                    switch (MainActivity.audioOutputType) {
-                        case "headphone":
-                            musicButton.setImageResource(R.drawable.headphones_35);
-                            break;
-                        case "headset":
-                            musicButton.setImageResource(R.drawable.headset_mic_35);
-                            break;
-                        case "bluetoothHeadset":
-                            musicButton.setImageResource(R.drawable.bluetooth_audio_35);
-                            break;
-                        default:
-                            musicButton.setImageResource(R.drawable.music_on_35);
-                            break;
-                    }
-                }
-                lastvolume = musicVolume;
+                broadcastAndOtherCommonMethods.setMusicIconWhenVolumeChanged(MainActivity.lastVolume, musicVolume, musicButton);
+                MainActivity.lastVolume = musicVolume;
             }
         };
 
@@ -540,7 +518,7 @@ public class Quick_Shortcut_Button_Service extends Service {
 
                         } else {
                             if (musicButton.isShown()) {
-                                broadcastAndOtherCommonMethods.setMusicIcon(audioManager, musicButton);
+                                broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), musicButton);
                             }
                         }
                     }
@@ -798,7 +776,7 @@ public class Quick_Shortcut_Button_Service extends Service {
             } else {
                 windowManager.addView(floatButtonContainer, wlp);
             }
-            broadcastAndOtherCommonMethods.setMusicIcon(audioManager, musicButton);
+            broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), musicButton);
 
         } else {
             if (notificationManager.getCurrentInterruptionFilter() == NotificationManager.INTERRUPTION_FILTER_ALL) {
@@ -809,7 +787,7 @@ public class Quick_Shortcut_Button_Service extends Service {
 
             WindowManager.LayoutParams fbcUpdate = (WindowManager.LayoutParams) floatButtonContainer.getLayoutParams();
             fbcUpdate.y = (int) y - (iconSize * 3);
-            if (x > (float)(width/2)) {
+            if (x > (float) (width / 2)) {
                 fbcUpdate.x = (int) (width - (x + iconSize));
                 fbcUpdate.gravity = Gravity.TOP | Gravity.END;
                 if (side.equals("left")) {
@@ -826,7 +804,7 @@ public class Quick_Shortcut_Button_Service extends Service {
                 }
             }
             windowManager.addView(floatButtonContainer, fbcUpdate);
-            broadcastAndOtherCommonMethods.setMusicIcon(audioManager, musicButton);
+            broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), musicButton);
         }
         windowManager.removeView(quickShortcutFloatButtonLayout);
     }

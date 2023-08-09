@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             "Alarm Volume", "Notification Volume", "System Volume", "Dial Tone Volume"};
 
     static String audioOutputType = "musicIcon";
+    static int lastVolume = 0;
 
     static InterstitialAd minterstitialAd;
     static int adCount = 0;

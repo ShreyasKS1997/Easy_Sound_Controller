@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 public class AudioData {
 
-    int lastMusicVolume;
     MediaRouter.Callback callback;
 
     public void setupCallback(SeekBar seekBar, ImageView imageViewMediaVolume) {
@@ -56,27 +55,8 @@ public class AudioData {
             public void onRouteVolumeChanged(MediaRouter mediaRouter, MediaRouter.RouteInfo routeInfo) {
                 int currentMusicVolume = routeInfo.getVolume();
                 seekBar.setProgress(currentMusicVolume);
-                if ((lastMusicVolume == 0 && currentMusicVolume >= 1) | (lastMusicVolume >= 1 && currentMusicVolume == 0)) {
-                    if (routeInfo.getVolume() <= 0) {
-                        imageViewMediaVolume.setImageResource(R.drawable.music_off_35);
-                    } else {
-                        switch (MainActivity.audioOutputType) {
-                            case "headphone":
-                                imageViewMediaVolume.setImageResource(R.drawable.headphones_35);
-                                break;
-                            case "headset":
-                                imageViewMediaVolume.setImageResource(R.drawable.headset_mic_35);
-                                break;
-                            case "bluetoothHeadset":
-                                imageViewMediaVolume.setImageResource(R.drawable.bluetooth_audio_35);
-                                break;
-                            default:
-                                imageViewMediaVolume.setImageResource(R.drawable.music_on_35);
-                                break;
-                        }
-                    }
-                }
-                lastMusicVolume = currentMusicVolume;
+                broadcastAndOtherCommonMethods.setMusicIconWhenVolumeChanged(MainActivity.lastVolume, currentMusicVolume, imageViewMediaVolume);
+                MainActivity.lastVolume = currentMusicVolume;
             }
         };
     }
@@ -85,7 +65,7 @@ public class AudioData {
         int currentMusicVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxMusicVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
-        lastMusicVolume = currentMusicVolume;
+        MainActivity.lastVolume = currentMusicVolume;
 
         seekBar.setProgress(currentMusicVolume);
         seekBar.setMax(maxMusicVolume);
