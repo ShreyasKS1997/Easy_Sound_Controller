@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        broadcastAndOtherCommonMethods.setMusicIcon(am, getApplicationContext());
+
         adView = new AdView(this);
         adView.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     adView.setAdUnitId("ca-app-pub-3940256099942544/9214589741");
                     adView.setAdSize(adwidth);
                     AdRequest adRequest = new AdRequest.Builder().build();
-                    adView.loadAd(adRequest);
+                    //adView.loadAd(adRequest);
                 }
             }
         });

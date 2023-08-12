@@ -17,6 +17,7 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaRouter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,7 +52,7 @@ public class First_Fragment extends Fragment {
     SharedPreferences sharedPreferencesVolumeLevels;
     private TextView noVolumesCheckedMessage;
 
-    private BroadcastReceiver broadcastReceiver;
+    private BroadcastReceiver ringModeChangedBroadcastReceiver;
 
     private BroadcastReceiver headsetPluggedUnpluggedBroadcast;
 
@@ -60,6 +61,8 @@ public class First_Fragment extends Fragment {
     SharedPreferences settingsSharedPreferences;
     boolean isFirstFragmentInitialized = false;
     MediaRouter mediaRouter;
+
+    private int currentVolumeWithDelay = 0;
 
 
     @Override
@@ -74,13 +77,30 @@ public class First_Fragment extends Fragment {
                 if (isInitialStickyBroadcast()) {
 
                 } else {
-                    broadcastAndOtherCommonMethods.setMusicIcon(audioManager);
+                    broadcastAndOtherCommonMethods.setMusicIcon(audioManager, context);
                     if (binding.imageView != null) {
-                        broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), binding.imageView);
+                        int currentMusic = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                        if (MainActivity.lastVolume == currentMusic) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    currentVolumeWithDelay = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                                    broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(currentVolumeWithDelay, binding.imageView);
+
+                                    if (binding.seekBar != null) {
+                                        binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+                                    }
+                                }
+                            }, 500);
+                        } else {
+                            broadcastAndOtherCommonMethods.setMusicIconWhenLayoutRefreshed(currentMusic, binding.imageView);
+                        }
                     }
                     if (binding.seekBar != null) {
                         binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
                     }
+
                     MainActivity.lastVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                 }
             }
@@ -92,19 +112,23 @@ public class First_Fragment extends Fragment {
         refreshFirstFragmentSeekbars = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-                binding.seekBar2.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL));
-                binding.seekBar3.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_RING));
-                binding.seekBar4.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
-                binding.seekBar5.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-                binding.seekBar6.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
-                binding.seekBar7.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_DTMF));
+                if (isInitialStickyBroadcast()) {
+
+                } else {
+                    binding.seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+                    binding.seekBar2.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL));
+                    binding.seekBar3.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_RING));
+                    binding.seekBar4.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+                    binding.seekBar5.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                    binding.seekBar6.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+                    binding.seekBar7.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_DTMF));
+                }
             }
         };
 
         requireActivity().registerReceiver(refreshFirstFragmentSeekbars, new IntentFilter("refreshFirstFragmentSeekBars"));
 
-        broadcastReceiver = new BroadcastReceiver() {
+        ringModeChangedBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (isInitialStickyBroadcast()) {
@@ -136,7 +160,7 @@ public class First_Fragment extends Fragment {
                 }
             }
         };
-        requireActivity().registerReceiver(broadcastReceiver, new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION));
+        requireActivity().registerReceiver(ringModeChangedBroadcastReceiver, new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION));
 
     }
 
@@ -379,8 +403,8 @@ public class First_Fragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        if (broadcastReceiver != null) {
-            requireActivity().unregisterReceiver(broadcastReceiver);
+        if (ringModeChangedBroadcastReceiver != null) {
+            requireActivity().unregisterReceiver(ringModeChangedBroadcastReceiver);
         }
         if (headsetPluggedUnpluggedBroadcast != null) {
             requireActivity().unregisterReceiver(headsetPluggedUnpluggedBroadcast);

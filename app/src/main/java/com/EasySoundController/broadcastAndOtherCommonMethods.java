@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
  import android.widget.ImageView;
+ import android.widget.Toast;
 
  import androidx.annotation.NonNull;
 
@@ -49,7 +50,7 @@ public class broadcastAndOtherCommonMethods {
         }
     }
 
-    static void setMusicIcon(AudioManager audioManager) {
+    static void setMusicIcon(AudioManager audioManager, Context context) {
         String headSetHeadphoneOrNone = headsetPluggedBroadcast(audioManager);
             switch (headSetHeadphoneOrNone) {
                 case "headphone":

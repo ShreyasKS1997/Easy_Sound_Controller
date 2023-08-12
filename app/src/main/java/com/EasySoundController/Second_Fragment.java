@@ -149,7 +149,7 @@ public class Second_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if(MainActivity.minterstitialAd != null && MainActivity.adCount == 0) {
-            MainActivity.minterstitialAd.show(requireActivity());
+            //MainActivity.minterstitialAd.show(requireActivity());
         }
 
         MainActivity.adCount += 1;
