@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     adView.setAdUnitId("ca-app-pub-3940256099942544/9214589741");
                     adView.setAdSize(adwidth);
                     AdRequest adRequest = new AdRequest.Builder().build();
-                    //adView.loadAd(adRequest);
+                    adView.loadAd(adRequest);
                 }
             }
         });

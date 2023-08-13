@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F2FA"
+    android:background="?attr/colorOnPrimary"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -25,35 +25,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_weight="1">
-
-        <FrameLayout
-            android:id="@+id/scrollUpArrow"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_horizontal|top"
-            android:clickable="false"
-            android:focusable="false"
-            android:visibility="gone">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:clickable="false"
-                android:focusable="false"
-                app:cardBackgroundColor="?attr/colorOnSecondary"
-                app:cardCornerRadius="12.5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/arrow_up_35" />
-            </androidx.cardview.widget.CardView>
-
-        </FrameLayout>
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -428,6 +399,35 @@
         </ScrollView>
 
         <FrameLayout
+            android:id="@+id/scrollUpArrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal|top"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_margin="1dp"
+                android:clickable="false"
+                android:focusable="false"
+                app:cardCornerRadius="11dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/UpAndDownArrowFirst"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/arrow_up_35" />
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/scrollDownArrow"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -437,17 +437,17 @@
             android:visibility="gone">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="1dp"
                 android:clickable="false"
                 android:focusable="false"
-                app:cardBackgroundColor="?attr/colorOnSecondary"
-                app:cardCornerRadius="12.5dp">
+                app:cardCornerRadius="11dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/UpAndDownArrowFirst"
                     android:clickable="false"
                     android:focusable="false"
                     android:importantForAccessibility="no"

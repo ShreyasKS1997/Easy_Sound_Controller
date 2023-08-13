@@ -25,30 +25,6 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <FrameLayout
-                android:id="@+id/scrollUpSettings"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_horizontal|top"
-                android:visibility="gone">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:background="?attr/colorOnSecondary"
-                    app:cardCornerRadius="12.5dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:importantForAccessibility="no"
-                        app:srcCompat="@drawable/arrow_up_35" />
-                </androidx.cardview.widget.CardView>
-            </FrameLayout>
-
             <ScrollView
                 android:id="@+id/settingsMainScrollView"
                 android:layout_width="match_parent"
@@ -386,26 +362,58 @@
             </ScrollView>
 
             <FrameLayout
-                android:id="@+id/scrollDownSettings"
+                android:id="@+id/scrollUpSettings"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_gravity="bottom|center_horizontal"
+                android:layout_gravity="top|center_horizontal"
+                android:clickable="false"
+                android:focusable="false"
                 android:visibility="gone">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_margin="1dp"
-                    android:background="?attr/colorOnSecondary"
-                    app:cardCornerRadius="12.5dp">
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:cardCornerRadius="11dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/UpAndDownArrowSecond"
                         android:clickable="false"
                         android:focusable="false"
                         android:importantForAccessibility="no"
-                        app:srcCompat="@drawable/arrow_down_35" />
+                        android:src="@drawable/arrow_up_35" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/scrollDownSettings"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:clickable="false"
+                android:focusable="false"
+                android:visibility="gone">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_margin="1dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:cardCornerRadius="11dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/UpAndDownArrowSecond"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/arrow_down_35" />
                 </androidx.cardview.widget.CardView>
             </FrameLayout>
 
