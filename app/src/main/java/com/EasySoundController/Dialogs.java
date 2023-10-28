@@ -596,13 +596,11 @@ public class Dialogs {
     public void rateUsDialog(Context context) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setTitle("Rate us");
-        alertDialogBuilder.setItems(new String[]{"Google Play Store", "Amazon App Store", "Galaxy App Store"}, (dialog, which) -> {
+        alertDialogBuilder.setItems(new String[]{"Google Play Store", "Amazon App Store"}, (dialog, which) -> {
             if (which == 0) {
                 broadcastAndOtherCommonMethods.openOnAppStores(context, "market://details?id=", "http://play.google.com/store/apps/details?id=");
             } else if (which == 1) {
                 broadcastAndOtherCommonMethods.openOnAppStores(context, "amzn://apps/android?p=", "http://www.amazon.com/gp/mas/dl/android?p=");
-            } else if (which == 2) {
-                broadcastAndOtherCommonMethods.openOnAppStores(context, "samsungapps://ProductDetail/", "http://www.samsungapps.com/appquery/appDetail.as?appId=");
             }
         });
         alertDialogBuilder.setNegativeButton("Close", (dialog, which) -> {

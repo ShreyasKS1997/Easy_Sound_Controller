@@ -130,27 +130,4 @@ public class broadcastAndOtherCommonMethods {
 
     }
 
-    static void loadInAd(Context context) {
-        AdRequest interstitialAdRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(context, "ca-app-pub-3940256099942544/1033173712", interstitialAdRequest, new InterstitialAdLoadCallback() {
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                MainActivity.minterstitialAd = null;
-            }
-
-            @Override
-            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                super.onAdLoaded(interstitialAd);
-                MainActivity.minterstitialAd = interstitialAd;
-                MainActivity.minterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                    @Override
-                    public void onAdImpression() {
-                        super.onAdImpression();
-                    }
-                });
-            }
-        });
-    }
-
 }

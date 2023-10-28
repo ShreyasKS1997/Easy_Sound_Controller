@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
     static String audioOutputType = "musicIcon";
     static int lastVolume = 0;
 
-    static InterstitialAd minterstitialAd;
-    static int adCount = 0;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        MobileAds.initialize(this, initializationStatus -> broadcastAndOtherCommonMethods.loadInAd(getApplicationContext()));
 
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -116,6 +111,5 @@ public class MainActivity extends AppCompatActivity {
         adView.destroy();
         adView = null;
         binding = null;
-        minterstitialAd = null;
     }
 }
